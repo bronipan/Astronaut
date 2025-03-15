@@ -1,0 +1,138 @@
+[gd_scene load_steps=18 format=3 uid="uid://cs56gelx6dfnu"]
+
+[ext_resource type="Texture2D" uid="uid://c3kka3ug5081j" path="res://Astronaut.png" id="1_gtphq"]
+[ext_resource type="Script" uid="uid://dtutrg8erdj0o" path="res://astronaut.gd" id="1_l76db"]
+[ext_resource type="Script" uid="uid://bnxp65kbax5b4" path="res://asteroid_timer.gd" id="3_m3ec0"]
+[ext_resource type="Texture2D" uid="uid://yenavlylthrh" path="res://Asteroid1.png" id="4_13l12"]
+[ext_resource type="Texture2D" uid="uid://3p1p2txeucqx" path="res://Asteroid2.png" id="5_8mvvu"]
+[ext_resource type="Texture2D" uid="uid://ci2735d38i7ri" path="res://Asteroid3.png" id="6_tqqck"]
+[ext_resource type="Texture2D" uid="uid://c5milv8hb412d" path="res://Asteroid4.png" id="7_hr6iv"]
+[ext_resource type="Texture2D" uid="uid://dma772s1kay68" path="res://Sternenhimmel.png" id="8_13l12"]
+[ext_resource type="Script" uid="uid://cpo1ymcsafui6" path="res://ereignisse.gd" id="9_8mvvu"]
+[ext_resource type="Script" uid="uid://r61hq2h7l3qe" path="res://gameover.gd" id="10_hr6iv"]
+[ext_resource type="Script" uid="uid://bfo2cjg6wwfqh" path="res://pumktzahl.gd" id="10_o40to"]
+[ext_resource type="Script" uid="uid://bahbd4t6vpure" path="res://startinfo.gd" id="11_o40to"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tqqck"]
+radius = 55.85
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hr6iv"]
+radius = 76.99
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o40to"]
+radius = 96.13
+
+[sub_resource type="SystemFont" id="SystemFont_8mvvu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tqqck"]
+font = SubResource("SystemFont_8mvvu")
+font_size = 80
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sternenhimmel" type="Sprite2D" parent="."]
+position = Vector2(806, 450)
+scale = Vector2(0.839147, 0.833458)
+texture = ExtResource("8_13l12")
+
+[node name="asteroidenfeld" type="Node2D" parent="."]
+
+[node name="Astronaut" type="Area2D" parent="."]
+position = Vector2(85, 316)
+script = ExtResource("1_l76db")
+
+[node name="Sprite2D" type="Sprite2D" parent="Astronaut"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_gtphq")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Astronaut"]
+polygon = PackedVector2Array(-16, -27, -44, -3, -37, 10, -30, 10, -30, 21, -36, 24, -38, 30, -44, 32, -43, 47, -38, 49, -32, 42, -20, 43, -16, 39, -5, 40, -1, 25, 10, 26, 16, 20, 28, 20, 33, 14, 19, 5, 19, 1, 40, -3, 47, -25, 40, -43, 26, -48, 11, -46, 0, -37, -2, -31, -13, -31)
+
+[node name="asteroidTimer" type="Timer" parent="." node_paths=PackedStringArray("asteroidenfeld")]
+wait_time = 0.504
+script = ExtResource("3_m3ec0")
+asteroidenfeld = NodePath("../asteroidenfeld")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="asteroidTimer"]
+visible = false
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="asteroidTimer/RigidBody2D"]
+position = Vector2(-84, 3)
+scale = Vector2(0.53, 0.53)
+texture = ExtResource("4_13l12")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="asteroidTimer/RigidBody2D"]
+position = Vector2(-84, 3)
+shape = SubResource("CircleShape2D_tqqck")
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="asteroidTimer"]
+visible = false
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="asteroidTimer/RigidBody2D2"]
+position = Vector2(-128, 0)
+scale = Vector2(0.69, 0.69)
+texture = ExtResource("5_8mvvu")
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="asteroidTimer/RigidBody2D2"]
+position = Vector2(-128, 0)
+shape = SubResource("CircleShape2D_hr6iv")
+
+[node name="RigidBody2D3" type="RigidBody2D" parent="asteroidTimer"]
+visible = false
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="asteroidTimer/RigidBody2D3"]
+position = Vector2(-185, 0)
+scale = Vector2(0.91, 0.91)
+texture = ExtResource("6_tqqck")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="asteroidTimer/RigidBody2D3"]
+position = Vector2(-190, 3)
+shape = SubResource("CircleShape2D_o40to")
+
+[node name="RigidBody2D4" type="RigidBody2D" parent="asteroidTimer"]
+visible = false
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="asteroidTimer/RigidBody2D4"]
+position = Vector2(-199, 0)
+texture = ExtResource("7_hr6iv")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="asteroidTimer/RigidBody2D4"]
+position = Vector2(-199, 0)
+polygon = PackedVector2Array(-110, -39, -126, 6, -114, 44, -60, 62, -27, 51, -24, 39, 6, 32, 19, 9, 43, -1, 67, 3, 86, -25, 110, -24, 115, 3, 123, 7, 113, -27, 87, -28, 57, -14, 24, -19, 9, -37, -26, -39, -36, -55, -68, -61, -95, -52)
+
+[node name="ereignisse" type="Node" parent="."]
+script = ExtResource("9_8mvvu")
+
+[node name="pumktzahl" type="Label" parent="."]
+offset_left = 1326.0
+offset_right = 1600.0
+offset_bottom = 110.0
+text = "000000"
+label_settings = SubResource("LabelSettings_tqqck")
+script = ExtResource("10_o40to")
+
+[node name="gameover" type="Label" parent="."]
+visible = false
+offset_left = 599.0
+offset_top = 394.0
+offset_right = 1033.0
+offset_bottom = 504.0
+text = "Game Over"
+label_settings = SubResource("LabelSettings_tqqck")
+script = ExtResource("10_hr6iv")
+
+[node name="startinfo" type="Label" parent="."]
+offset_left = 367.0
+offset_top = 716.0
+offset_right = 1217.0
+offset_bottom = 826.0
+text = "Leertaste zum starten"
+label_settings = SubResource("LabelSettings_tqqck")
+script = ExtResource("11_o40to")
+
+[connection signal="body_entered" from="Astronaut" to="Astronaut" method="_on_body_entered"]
+[connection signal="timeout" from="asteroidTimer" to="asteroidTimer" method="_on_timeout"]
