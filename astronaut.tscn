@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cs56gelx6dfnu"]
+[gd_scene load_steps=21 format=3 uid="uid://cs56gelx6dfnu"]
 
 [ext_resource type="Texture2D" uid="uid://c3kka3ug5081j" path="res://Astronaut.png" id="1_gtphq"]
 [ext_resource type="Script" uid="uid://dtutrg8erdj0o" path="res://astronaut.gd" id="1_l76db"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://c5milv8hb412d" path="res://Asteroid4.png" id="7_hr6iv"]
 [ext_resource type="Texture2D" uid="uid://dma772s1kay68" path="res://Sternenhimmel.png" id="8_13l12"]
 [ext_resource type="Script" uid="uid://cpo1ymcsafui6" path="res://ereignisse.gd" id="9_8mvvu"]
+[ext_resource type="Texture2D" uid="uid://mpkq1xmg7uy7" path="res://75078-trademark-symbol-dollar-us-yellow-coin.png" id="9_a5vrh"]
 [ext_resource type="Script" uid="uid://r61hq2h7l3qe" path="res://gameover.gd" id="10_hr6iv"]
 [ext_resource type="Script" uid="uid://bfo2cjg6wwfqh" path="res://pumktzahl.gd" id="10_o40to"]
 [ext_resource type="Script" uid="uid://bahbd4t6vpure" path="res://startinfo.gd" id="11_o40to"]
@@ -20,6 +21,12 @@ radius = 55.85
 radius = 76.99
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o40to"]
+radius = 96.13
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a5vrh"]
+radius = 48.28
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k5rh3"]
 radius = 96.13
 
 [sub_resource type="SystemFont" id="SystemFont_8mvvu"]
@@ -69,19 +76,21 @@ shape = SubResource("CircleShape2D_tqqck")
 [node name="RigidBody2D2" type="RigidBody2D" parent="asteroidTimer"]
 visible = false
 collision_mask = 0
+metadata/typ = "asteroid"
 
 [node name="Sprite2D" type="Sprite2D" parent="asteroidTimer/RigidBody2D2"]
 position = Vector2(-128, 0)
 scale = Vector2(0.69, 0.69)
 texture = ExtResource("5_8mvvu")
 
-[node name="CollisionPolygon2D" type="CollisionShape2D" parent="asteroidTimer/RigidBody2D2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="asteroidTimer/RigidBody2D2"]
 position = Vector2(-128, 0)
 shape = SubResource("CircleShape2D_hr6iv")
 
 [node name="RigidBody2D3" type="RigidBody2D" parent="asteroidTimer"]
 visible = false
 collision_mask = 0
+metadata/typ = "asteroid"
 
 [node name="Sprite2D" type="Sprite2D" parent="asteroidTimer/RigidBody2D3"]
 position = Vector2(-185, 0)
@@ -94,15 +103,34 @@ shape = SubResource("CircleShape2D_o40to")
 
 [node name="RigidBody2D4" type="RigidBody2D" parent="asteroidTimer"]
 visible = false
+position = Vector2(-216, 0)
 collision_mask = 0
+metadata/typ = "asteroid"
 
 [node name="Sprite2D" type="Sprite2D" parent="asteroidTimer/RigidBody2D4"]
-position = Vector2(-199, 0)
+position = Vector2(-59, 0)
 texture = ExtResource("7_hr6iv")
+offset = Vector2(65, 0)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="asteroidTimer/RigidBody2D4"]
-position = Vector2(-199, 0)
-polygon = PackedVector2Array(-110, -39, -126, 6, -114, 44, -60, 62, -27, 51, -24, 39, 6, 32, 19, 9, 43, -1, 67, 3, 86, -25, 110, -24, 115, 3, 123, 7, 113, -27, 87, -28, 57, -14, 24, -19, 9, -37, -26, -39, -36, -55, -68, -61, -95, -52)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="asteroidTimer/RigidBody2D4"]
+position = Vector2(-66, 0)
+shape = SubResource("CircleShape2D_a5vrh")
+
+[node name="goldmunce" type="RigidBody2D" parent="asteroidTimer"]
+visible = false
+collision_mask = 0
+metadata/typ = "goldmunze"
+metadata/hodnota = 1000
+
+[node name="Sprite2D" type="Sprite2D" parent="asteroidTimer/goldmunce"]
+position = Vector2(-216, 3)
+scale = Vector2(0.365234, 0.369141)
+texture = ExtResource("9_a5vrh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="asteroidTimer/goldmunce"]
+position = Vector2(-216, 3)
+shape = SubResource("CircleShape2D_k5rh3")
+one_way_collision_margin = 0.0
 
 [node name="ereignisse" type="Node" parent="."]
 script = ExtResource("9_8mvvu")
